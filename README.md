@@ -69,3 +69,9 @@ with the information necessary to validate it in
 its altered state (which will be found and can be 
 confirmed later in the blockchain)
 ```
+
+**FAQs**
+
+**Q1. Isn't this basically just Simplified Payment Verification / BIP 157 / Neutrino?**
+
+The similarity is the reliance on proof of work - but actually all nodes do that. Regular full nodes rely on PoW to order transactions and avoid double spending - which is what gives Bitcoin value as money. This solution additionally uses PoW to verify that some data can be safely and securely deleted (optionally, of course). SPV nodes rely on PoW to check that a transaction has been verified and accepted by the rest of the network, so that the SPV node doesn't have to store and verify it.
