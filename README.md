@@ -75,3 +75,31 @@ confirmed later in the blockchain)
 **Q1. Isn't this basically just Simplified Payment Verification / BIP 157 / Neutrino?**
 
 The similarity is the reliance on proof of work - but actually all nodes do that. Regular full nodes rely on PoW to order transactions and avoid double spending - which is what gives Bitcoin value as money. This solution additionally uses PoW to verify that some data can be safely and securely deleted (optionally, of course). SPV nodes rely on PoW to check that a transaction has been verified and accepted by the rest of the network, so that the SPV node doesn't have to store and verify it.
+
+**Q2. Doesn't this lower security, remove autonomy, and introduce trust?**
+
+It certainly increases the attack surface - it's another feature, which is another target for vulnerabilities. So it's not zero cost, for security, but the cost is very low. It doesn't introduce any more trust in the system. That's what the consensus rule does. Only safe deletions of arbitrary data are allowed in, and even then node operators decide which (if any) they want to apply.
+
+**Q3. Doesn't this allow an attacker to modify the hash of a transaction, and modify the contents of the transaction, thereby bypassing the transaction signature? Why sign a transaction if anyone can just modify it later?**
+
+Yes, it does allow an attacker to modify the hash of a transaction, and to modify the contents of the transaction. But the new consensus rule ensures that we know what the hash was originally, and we know exactly what data was changed and what wasn't. That gives the node operator enough information to decide if it's safe to accept the change. For example, in an OP_RETURN with a single data push, the contents of that data push are safe to modify. But if the attacker wants to modify the transaction's op codes or signature, the change isn't going to pass consensus, and it isn't going to make it into the blockchain.
+
+**Q4. Why not extend this to a full data hiding scheme like ZKPs, Monero, ZeroSync? Do it right, once and for all?**
+
+What I've presented here is a simple, opt-in solution, with low overheads. Implementation could be quite lightweight in terms of code changes, and quite fast if needed. For the problem this attempts to solve, those other solutions are severe overkill.
+
+**Q5: In the event of miner and node collusion, such that the blockchain is effectively altered: what harm can occur, and how might it be mitigated or limited?**
+
+This is a 51% attack, and the changes proposed here do increase the blast radius of that attack. The usual 51% scenario lets the attacker double spend their funds. This new 51% attack lets the attacker alter a transaction and bypass the transaction signature, allowing them to spend other people's money. But only for anyone who wants to accept the change to the transaction. Certainly, we can expect the regular 51% attack to remain more profitable for attackers, because it affects everyone.
+
+**Q6: What data is safe to remove from the blockchain?**
+
+Data pushes that contain arbitrary data, that's not relevant to future transactions. At the very least, data in an OP_RETURN output data push. There will be other examples, but there will also be an unclear boundary between the safe and the unsafe. Node operators will continue to have the final say on whether to apply a change.
+
+**Q7: What data is unsafe to remove from the blockchain?**
+
+Parts of the transaction that includes op codes or signatures. Changing these would change the meaning of the transaction (in relation to past and future transactions on the blockchain). Therefore, these kinds of changes should not be accepted into the blockchain.
+
+**Q8: Why do miners need to enforce the safety of deletions at the consensus level? Why not have miners accept all deletions, and leave it to nodes to decide what to accept?**
+
+If we do it at the consensus level, then future nodes may be able to accept deletions from peers (e.g. in initial block download) without ever having to hold the objectionable content - because they know that each deletion is only a data push, and the op code semantics of transactions haven't changed. If it's left to nodes to decide what's safe, then a node can't really accept a change from another node without seeing the original transaction first - because that change may have altered the semantics and the financial effect of the transaction.
