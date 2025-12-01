@@ -41,7 +41,8 @@ Once this statement is established in the blockchain, any node can choose to del
 **Putting it all together**
 
 Here's some very loose pseudocode showing the steps to remove the objectionable content:
-```1. write the following to the blockchain:
+```
+1. write the following to the blockchain:
 1.a) the transaction (T) to be changed 
 1.b) the exact data (D) to be changed, specified
 by byte offset, and length (or multiple byte
@@ -66,4 +67,5 @@ valid and safe
 this block in future, in its altered state, along 
 with the information necessary to validate it in 
 its altered state (which will be found and can be 
-confirmed later in the blockchain)```
+confirmed later in the blockchain)
+```
