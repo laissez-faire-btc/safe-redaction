@@ -71,6 +71,7 @@ confirmed later in the blockchain)
 ```
 
 **Hard fork or soft fork?**
+
 I can see a few ways to implement this consensus change. The most straightforward is a new opcode, where we push the facts we want to verify onto the stack, and then the new opcode verifies that they meet the rules for what can be deleted, per this proposal. Much as how OP_RETURN just accepts data and moves on, this new opcode would do the same - but with the exception that we require the data to be well formed, and we require the implied statement about hashes to be true, or else the transaction is rejected.
 
 Slightly less obvious and slightly more interesting is the possibility of a soft fork. One way to do that is to use an arbitrary data field and assign meaning to that arbitrary data. For example, we might define a data format to represent a deletion statement. Then, any data that is a well-formed deletion statement is not allowed to contain false statements about transaction hashes. True statements are still allowed, as is any arbitrary data that does not conform to the definition of a well-formed deletion statement.
@@ -81,13 +82,14 @@ Here is a concrete example of how we might differentiate well formed deletion st
 ```
 <deletion-statement> ::= <uuid> <transaction-id> <data-segment-list> <transaction-hash-update> <signature-hash-update-list>
 ```
-Where loosely speaking: 
-* <deletion-statement> = the entire contents of an op return output's data pushes
-* <uuid> = a specific 16 byte value used (only) to specify that this data is a deletion statement
-* <transaction-id> = the id of the transaction being modified
-* <data-segment-list> = a sequence of pairs of numbers, each pair being first the index of the first byte to delete, and second the number of bytes to delete - with the entire list prepended with the length of the list 
-* <transaction-hash-update> = the new transaction hash (transaction id)
-* <signature-hash-update-list> = a list of hashes, each of which is the new hash to be used for one signature in the transaction - not prepended by the length of the list because the data changed (<data-segment-list>) is sufficient to uniquely describe exactly which hashes change - and unchanged hashes are both included here
+Where loosely speaking:
+
+* `<deletion-statement>` = the entire contents of an op return output's data pushes
+* `<uuid>` = a specific 16 byte value used (only and always) to signify that this data is a deletion statement
+* '<transaction-id>' = the id of the transaction being modified
+* '<data-segment-list>' = a sequence of pairs of numbers, each pair being first the index of the first byte to delete, and second the number of bytes to delete - with the entire list prepended with the length of the list 
+* `<transaction-hash-update>` = the new transaction hash (transaction id)
+* '<signature-hash-update-list>` = a list of hashes, each of which is the new hash to be used for one signature in the transaction - not prepended by the length of the list because the data changed (`<data-segment-list>`) is sufficient to uniquely describe exactly which hashes change - and unchanged hashes are both included here
 
 **FAQs**
 
