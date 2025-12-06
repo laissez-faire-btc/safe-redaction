@@ -82,14 +82,15 @@ Here is a concrete example of how we might differentiate well formed deletion st
 ```
 <deletion-statement> ::= <uuid> <transaction-id> <data-segment-list> <transaction-hash-update> <signature-hash-update-list>
 ```
+
 Where loosely speaking:
 
 * `<deletion-statement>` = the entire contents of an op return output's data pushes
 * `<uuid>` = a specific 16 byte value used (only and always) to signify that this data is a deletion statement
-* '<transaction-id>' = the id of the transaction being modified
-* '<data-segment-list>' = a sequence of pairs of numbers, each pair being first the index of the first byte to delete, and second the number of bytes to delete - with the entire list prepended with the length of the list 
+* `<transaction-id>` = the id of the transaction being modified
+* `<data-segment-list>` = a sequence of pairs of numbers, each pair being first the index of the first byte to delete, and second the number of bytes to delete - with the entire list prepended with the length of the list 
 * `<transaction-hash-update>` = the new transaction hash (transaction id)
-* '<signature-hash-update-list>` = a list of hashes, each of which is the new hash to be used for one signature in the transaction - not prepended by the length of the list because the data changed (`<data-segment-list>`) is sufficient to uniquely describe exactly which hashes change - and unchanged hashes are both included here
+* `<signature-hash-update-list>` = a list of hashes, each of which is the new hash to be used for one signature in the transaction - not prepended by the length of the list because the data changed (`<data-segment-list>`) is sufficient to uniquely describe exactly which hashes change - and unchanged hashes are both included here
 
 **FAQs**
 
