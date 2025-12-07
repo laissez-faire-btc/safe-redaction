@@ -1,0 +1,47 @@
+
+
+On Thu, 20 Nov 2025, Lazy Fair, <laissez.faire.btc@gmail.com> wrote:
+
+I propose two changes to Bitcoin, one at the consensus level, and one at the client level. The purpose of this is to support filtering of objectionable content after the content has been mined, allowing each node operator to maintain only that data they find agreeable. In so doing, my hope is that we can satisfy all users, and deal with their greatest concerns.
+
+I do however acknowledge those people that want to stop miners from mining non-monetary transactions, because of the data storage and processing cost, and I recognised that this proposal does nothing to address those concerns.
+
+*** Motivation ***
+
+You can't just change or delete some data from the blockchain, because a hash of everything in a block is included in the next block. If you change the data, you change the hash. The design presented here is an attempt to achieve a compromise, where a person can have all of the benefits of running a full node, including the integrity of the ledger, yet without storing the objectionable content - and importantly without even being able to recreate that objectionable content from what data they still have.
+
+*** Preliminary ***
+
+Objectionable content is defined here as whatever you want it to be, and two users don't have to share the same views. One person might object to copyrighted material used without permission, another a negative depiction of the prophet Muhammad, and another video of the sexual abuse of children. The design presented below lets each person decide what to remove for themself (if anything), while those who want everything can still have it all.
+
+The design lets a user remove any data, and deals with the impact on the matching of block hashes, data integrity and malleability. 
+
+In the case of OP_RETURN data, the result should be no functional effect at all. Whether that's also possible for other data elements will depend on the semantics of that data.
+
+*** Solution ***
+
+This solution is based on two ideas, both aimed at maintaining data integrity through hashing, while removing some of the hash's input data stream.
+
+*** First Idea ***
+
+When performing a hash of some data (D), each chunk of data that's processed updates an internal state (S) of the hashing algorithm. If you know what the internal state is at point A and then at point B, then you can compute the final hash of D even without the data between A and B. This is the first idea. First you need to know what S(A) and S(B) are, and once you do, you can compute the hash of D, without the data between A and B. You run the hashing algorithm normally up to A, then you update the internal state from S(A) to S(B), then you continue hashing from B to the end of D.
+
+The hash still works as an integrity check for the data before A, and the data after B: change any of this, and the final hash will change. Now you can safely change or delete the data in between, without breaking the integrity of the blockchain and proof of work - but only if you can securely obtain S(A) and S(B), and only if you don't need the data between A and B for anything else.
+
+The easiest way to obtain S(A) and S(B) is to calculate them yourself, but that requires that you hold the objectionable data, at least for a time. That also requires finding someone else that holds the objectionable data. But what if instead, we could share S(A) and S(B) across the network, do it securely, and in a way where up to 100% of nodes could choose to drop the data in between, permanently, without breaking anything?
+
+*** Second idea ***
+
+It may seem like there is no one you can trust to tell you what S(A) and S(B) are. There is only one source of data that a Bitcoin node can trust, and that is the blockchain, as mined by miners, with the most proof of work, and verified locally. Therefore, the second idea is that S(A) and S(B) are trusted if (and only if) they are written into the blockchain, and verified by the network.
+
+For example, we write data to the semantic effect of "In Transaction X: at byte offset A, the internal state of the hash function is S1; at byte offset B, the internal state of the hash function is S2." Miners then mine this statement into a block, and verifiers confirm that it is cryptographically accurate with respect to the data in Transaction X as described - or else they drop the new block as invalid.
+
+At this point, any node can choose to delete the data between S1 and S2. This can now be done with confidence because they can double check the accuracy, and the impact on the ledger, before they delete the data. After that they may also be able to share (with the agreement of the receiving node) this modified transaction as part of initial block downloads, along with S1 and S2 - to any other nodes that don't want this objectionable content. The receiving nodes wouldn't immediately and necessarily be able to trust S1 and S2, but they would eventually, once they have the full blockchain.
+
+*** Conclusion ***
+
+This isn't a concrete proposal - it's not even close - but perhaps it might be the start of a fruitful conversation. I have more to say, but this email is long enough already. Email me if you're interested in discussing or developing these ideas together. I have a private Discord server, but I'm open to other suggestions, or just further discussion here.
+
+Laissez faire, laissez passer.
+
+Let it be, let it go.
