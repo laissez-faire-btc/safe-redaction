@@ -1,0 +1,30 @@
+On Sat, 6 Dec 2025, Lazy Fair, <laissez.faire.btc@gmail.com> wrote:
+
+I've started putting together some ideas around how to remove objectionable content from the blockchain. The very early work-in-progress description is on GitHub: https://github.com/laissez-faire-btc/safe-remove
+
+I won't include all the details here, because there's necessarily a lot to cover, but the basic design goals I've aimed to address are something like this:
+
+* optional - each node gets to decide what to remove, if anything 
+* safe - provably no harm is done to those not choosing to use it, and any cost or risk to those using it is well understood, minimal, and mitigated
+* full node functionality - a node that does remove content can still do everything it could have done otherwise, without relying on anyone else
+* retrospective - content that exists on the blockchain today (pre-implementation) can be removed later (post-implementation)
+* trustless, verifiable, permissionless - control messages enabling data to be removed are simple verifiable statements of fact that can be written by anybody
+* lightweight - minimal changes and impact to policy, consensus, implementation, usage, the economy
+* granularity, associativity, commutability, idempotence - the least possible data is removed, and ordering is inconsequential
+* transferable - nodes that choose to remove objectionable content can share those blocks (with content removed) with others who hold the same objection, so that the receiver may never even momentarily hold the objectionable content
+
+Being design goals, these are probably not all achievable. I'll need your help to work through all the details.
+
+I have some more notes I just haven't written up yet, so I'm keen for your input please, on what direction I should take, questions I should answer, aspects I should consider or detail further, etc.
+
+In the absence of any feedback, I'll be proceeding with either documenting the threat model, or a bit of a literature review - starting with the following, which I've found but not yet dived into:
+* "Redactable Blockchain in the Permissionless Setting", Deuber et al, 2019, https://arxiv.org/abs/1901.03206
+* "Redactable Blockchain: Comprehensive Review, Mechanisms, Challenges, Open Issues and Future Research Directions", Abd Ali et al, 2023, https://www.mdpi.com/1999-5903/15/1/35
+
+P.S: I've had some issues with this mailing list. I emailed a few weeks back and my first email got through (https://groups.google.com/g/bitcoindev/c/sn3-Uc1yPx4), but my second and third didn't. I think Google has labelled me a spammer (or, hopefully, just the previous thread, as spam). There was one obvious spam message to the thread (most people won't have seen it because it will definitely have failed at moderation, but I did get it because it was reply-all - not just to the mailing list). From what I can see, Gmail classifies spam only at the conversation / thread level, not the individual email level - it's all or nothing. I found this out myself when I tried to mark that one email as spam, and the entire thread (including my original email) got marked as spam and moved to my spam folder. So it's possible others in the conversation unintentional marked my email as spam. Regardless of specific, my emails under that thread are certainly being blocked somehow. If anyone knows more about this, please reach out. Hopefully this email isn't a waste of time - but if it doesn't show up on the mailing list archive, I guess I'll have to create a new email address and try again.
+
+I've cc'd others from that thread, into this new one. Thank you to those who provided feedback there. You may not have seen my replies, but please know that I was paying attention! Certainly, you'll see the design is significantly changed and improved.
+
+Laissez faire, laissez passer.
+
+Let it be, let it go.
