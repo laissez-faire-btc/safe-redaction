@@ -28,7 +28,7 @@ That completes the deletion statement payload. In summary, we have the following
 * the transaction id of Transaction 2, which is the transaction to be operated on [32 bytes] 
 * 1, which is the number of data segments to be deleted [2 bytes] 
 * the byte offset of the first byte to be deleted [4 bytes] 
-* the number of bytes to be deleted [4 bytes] 
+* the number of bytes to be redacted, which will be done by replacing them all with zeroes [4 bytes] 
 * the updated transaction hash for Transaction 2 [32 bytes] 
 * original hash value for the single signature [32 bytes] 
 * updated hash value for the single signature [32 bytes]
