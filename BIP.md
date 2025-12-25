@@ -4,6 +4,7 @@
   Title: Safe Redaction
   Authors: Laissez Faire BTC <laissez.faire.btc@gmail.com>
   Status: Draft
+  Type: Specification
   Assigned: ?
   Licence: CC0-1.0 OR MIT-0
   Discussion:
