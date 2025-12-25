@@ -36,7 +36,7 @@ The elements of the Redaction Statement workflow (including writing, mining, con
 ## Changelog
 
 * __0.0.0__ (2025-12-25):
-    * initial draft
+  * initial draft
 
 ## Copyright
 
