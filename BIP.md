@@ -43,6 +43,10 @@ The elements of the Redaction Statement workflow (including writing, mining, con
 
 This BIP is in the public domain. No Rights Reserved.
 
+This work is available under [Creative Commons Zero v1.0 Universal](https://spdx.org/licenses/CC0-1.0.html).
+
+This work is available under the [MIT No Attribution](https://spdx.org/licenses/MIT-0.html) licence.
+
 ## Related Work
 
 - ["Redactable Blockchain in the Permissionless Setting", Deuber et al, 2019](https://arxiv.org/abs/1901.03206)
