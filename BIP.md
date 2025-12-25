@@ -1,11 +1,11 @@
 ```
-  BIP: ?
+  BIP: ? (unassigned)
   Layer: Consensus (soft fork)
   Title: Safe Redaction
   Authors: Laissez Faire BTC <laissez.faire.btc@gmail.com>
   Status: Draft
   Type: Specification
-  Assigned: ?
+  Assigned: ? (unassigned)
   Licence: CC0-1.0 OR MIT-0
   Discussion:
     2025-12-06: https://gnusha.org/pi/bitcoindev/CABHzxrjfvyBRD7sG9rngvDhr9cfzLEQibn4bup_J8pz7UHQpqA@mail.gmail.com/T/
@@ -27,6 +27,10 @@ The elements of the Redaction Statement workflow (including writing, mining, con
 ## Motivation
 
 What problem does Safe Redaction address?
+
+* illegal content
+* immoral and abhorrent content
+* information hazards
 
 ## Specification
 
@@ -66,3 +70,7 @@ An academic proposal to enable redaction through a hard fork. It would change Bi
 **"Redactable Blockchain: Comprehensive Review, Mechanisms, Challenges, Open Issues and Future Research Directions", Abd Ali et al, 2023,** [https://www.mdpi.com/1999-5903/15/1/35](https://www.mdpi.com/1999-5903/15/1/35)
 
 This is a recent literature review that considers various methods of redacting blockchains (including Bitcoin). It goes into depth about the various reasons that a participant may want to redact content. It also demonstrates that (as of 2023) there were no realistic and practical solutions to this problem.
+
+Redactable signatures: https://people.eecs.berkeley.edu/~daw/papers/hom-rsa02.pdf
+
+Sanitizable signatures: https://link.springer.com/chapter/10.1007/11555827_10
