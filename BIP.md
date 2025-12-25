@@ -28,7 +28,8 @@ The elements of the Redaction Statement workflow (including writing, mining, con
 
 What problem does Safe Redaction address?
 
-One of Bitcoin's greatest strengths is also a bit of a problem: it's permissionless, and it's uncensorable. The status quo is this: if you want to get some data into the blockchain, there is no restriction. You just follow the rules, and you pay by byte. But if you want to get some data removed, that's a hard fork. Now you need 51% of the miners to agree to a new rule: that specific data is not allowed in the blockchain. And you'll need to roll back to the block before it was mined, too.
+One of Bitcoin's greatest strengths is also a bit of a problem: it's permissionless, and it's uncensorable. The status quo is this: if you want to get some data into the blockchain, there is no restriction. You just follow the rules, and you pay by the byte. But if you want to get some data removed, that's a hard fork. Now you need 51% of the miners to agree to a new rule: this specific data is not allowed in the blockchain; not now, and not ever. And you'll need to roll back to the block before it was mined, too.
+
 
 * illegal content
 * immoral and abhorrent content
