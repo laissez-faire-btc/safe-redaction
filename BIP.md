@@ -71,6 +71,8 @@ An academic proposal to enable redaction through a hard fork. It would change Bi
 
 This is a recent literature review that considers various methods of redacting blockchains (including Bitcoin). It goes into depth about the various reasons that a participant may want to redact content. It also demonstrates that (as of 2023) there were no realistic and practical solutions to this problem.
 
+Chameleon hashes:
+
 Redactable signatures: https://people.eecs.berkeley.edu/~daw/papers/hom-rsa02.pdf
 
 Sanitizable signatures: https://link.springer.com/chapter/10.1007/11555827_10
