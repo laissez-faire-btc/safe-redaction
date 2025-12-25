@@ -34,6 +34,8 @@ What problem does Safe Redaction address?
 
 * vast disparity of views
 
+* support for businesses (who in many countries are held to a higher standard than individuals)
+
 ## Specification
 
 How does Safe Redaction work?
