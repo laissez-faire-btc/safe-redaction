@@ -26,7 +26,7 @@ The elements of the Redaction Statement workflow (including writing, mining, con
 
 ## Motivation
 
-What problem does Safe Redaction address?
+**What problem does Safe Redaction address?**
 
 One of Bitcoin's greatest strengths is also a bit of a problem: it's permissionless, and it's uncensorable. The status quo is this: if you want to get some data into the blockchain, there is no restriction. You just follow the rules, and you pay by the byte. But if you want to get some data removed, that's a hard fork. Now you need 51% of the miners to agree to a new rule: this specific data is not allowed in the blockchain; not now, and not ever. And you'll need to roll back to the block before it was mined, too.
 
@@ -42,19 +42,19 @@ Most Bitcoin users are okay with this, because the benefits greatly outweigh the
 
 ## Specification
 
-How does Safe Redaction work?
+**How does Safe Redaction work?**
 
 ## Rationale
 
-Why is this the right solution to the redaction problem?
+**Why is this the right solution to the problem?**
 
 ## Backward Compatibility
 
-How will existing nodes and existing blocks handle this?
+**How will existing nodes and existing blocks handle this?**
 
 ## Reference Implementation
 
-Has this been implemented, in any way, shape or form?
+**Has this been implemented, in any way, shape or form?**
 
 ## Changelog
 
