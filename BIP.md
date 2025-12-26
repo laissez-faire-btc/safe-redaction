@@ -31,7 +31,7 @@ The elements of the Redaction Statement workflow (including writing, mining, con
 
 ## Motivation
 
-**What problem does Safe Redaction address?**
+**What issue does Safe Redaction address?**
 
 One of Bitcoin's great strengths is being permissionless and uncensorable. But that can also be a bit of a problem.
 
@@ -39,11 +39,13 @@ The status quo is this: if you want to get some data into the blockchain, there 
 
 In practice, this means that *absolutely any data* can be written to the blockchain, and *absolutely no data* can be removed. 
 
-An archival node can only be run by a person who is comfortable with this, and comfortable with holding the data that is currently embedded in the blockchain - according to their conscience, and according to their local laws and/or law enforcement.
+An archival node can only be run by a person who is comfortable with this, and also comfortable with holding the data that is currently embedded in the blockchain - according to their conscience, and according to their local laws and law enforcement.
 
-* illegal content
-* immoral and abhorrent content
-* information hazards
+This BIP deals with the following issues:
+
+* There is content in the blockchain today, that in some jurisdictions makes it illegal to run a node. 
+* The practical options for Bitcoin users today are all-or-nothing. If you're not comfortable with arbitrary data on your system, you don't run a node. In that case, if you do want to use Bitcoin anyway, then you rely on others to run nodes and keep the network running. 
+* Even for people who are comfortable with the data that is in the blockchain today, finding none of it objectionable, something they do find objectionable may get mined tomorrow.
 
 * vast disparity of views
 
@@ -62,6 +64,8 @@ An archival node can only be run by a person who is comfortable with this, and c
 ## Rationale
 
 **Why is this the right solution to the problem?**
+
+This proposal doesn't impose any definition of objectionable content on anyone, or any process in determining what should count as objectionable. This is entirely up to each individual to decide for themself.
 
 ## Backward Compatibility
 
