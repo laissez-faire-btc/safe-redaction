@@ -45,7 +45,7 @@ Bitcoin is money for everybody, but the current rules require that to be a full 
 
 ~This BIP deals with the following issues:~
 
-~* There is content in the blockchain today, that in some jurisdictions makes it illegal to run a node. 
+~ * There is content in the blockchain today, that in some jurisdictions makes it illegal to run a node. 
 * The practical options for Bitcoin users today are all-or-nothing. If you're not comfortable with arbitrary data on your system, you don't run a node. In that case, if you do want to use Bitcoin anyway, then you rely on others to run nodes and keep the network running. 
 * Even for people who are comfortable with the data that is in the blockchain today, finding none of it objectionable, something they do find objectionable may get mined tomorrow.
 * There is a vast diversity of views on what individuals consider objectionable. For example, while a majority of Europeans might care about the legality of storing personal information without the subject's consent (vis. the GDPR), the majority globally most likely do not. The same may well be true for most regions, most countries, most categories of potentially objectionable content, and even most individuals.
