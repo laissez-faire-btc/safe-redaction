@@ -35,7 +35,7 @@ The elements of the Redaction Statement workflow (including writing, mining, con
 
 Bitcoin is money for everybody, but the current rules require that to be a full participant, to run an archival node, to contribute to the resilience of the network, to be entirely self sufficient, you must be willing to hold any arbitrary data that is mined, no matter how objectionable. There are, no doubt, people and businesses who would like to join the network, but will not do so under these rules, because they cannot currently do so safely.
 
-This BIP provides a safe means to redact objectionable content, in line with the following design goals:
+This BIP provides a means to redact objectionable content, with minimal impact, in line with the following design goals:
 
 * optional - each node gets to decide what to redact, if anything 
 * safe - provably no harm is done to those not choosing to use it, and any cost or risk to those using it is well understood, minimal, and mitigated
@@ -45,22 +45,6 @@ This BIP provides a safe means to redact objectionable content, in line with the
 * lightweight - minimal changes and impact to policy, consensus, implementation, usage, the economy
 * granularity, associativity, commutability, idempotence - the least possible data is redacted, and the ordering of Redaction Statements is inconsequential
 * transferable - nodes that choose to redact objectionable content can share those blocks (with content removed) with others who hold the same objection, so that the receiver may never even momentarily hold the objectionable content
-
-~One of Bitcoin's great strengths is being permissionless and uncensorable. But that can also be a bit of a problem.~
-
-~The status quo is this: if you want to get some data into the blockchain, there is no restriction. You just follow the rules, and you pay by the byte, at market rates. But if you want to get some data removed, that's a hard fork. Now you need 51% of the miners to agree to a new rule: that this specific data is not allowed in the blockchain. You'll need to roll back to the block before it was mined, too.~
-
-~In practice, this means that *absolutely any data* can be written to the blockchain, and *absolutely no data* can be removed.~
-
-~An archival node can only be run by a person who is comfortable with this, and also comfortable with holding the data that is currently embedded in the blockchain - according to their conscience, and according to their local laws and law enforcement.~
-
-~This BIP deals with the following issues:~
-
-~There is content in the blockchain today, that in some jurisdictions makes it illegal to run a node. 
- The practical options for Bitcoin users today are all-or-nothing. If you're not comfortable with arbitrary data on your system, you don't run a node. In that case, if you do want to use Bitcoin anyway, then you rely on others to run nodes and keep the network running. 
- Even for people who are comfortable with the data that is in the blockchain today, finding none of it objectionable, something they do find objectionable may get mined tomorrow.
- There is a vast diversity of views on what individuals consider objectionable. For example, while a majority of Europeans might care about the legality of storing personal information without the subject's consent (vis. the GDPR), the majority globally most likely do not. The same may well be true for most regions, most countries, most categories of potentially objectionable content, and even most individuals.
- The status quo may be more appropriate for individuals, but it is less appropriate for businesses. In many jurisdictions, businesses are held to a higher standard, and have greater restrictions placed on them by regulation. They may also have more to lose then many individuals.~
 
 ## Specification
 
