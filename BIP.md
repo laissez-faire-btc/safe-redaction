@@ -14,7 +14,7 @@
   Requires: 3
 ```
 
-The key words "MUST", "MUST NOT", "REQUIRED","SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED",  "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119).
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119). Note that the force of these words is modified by the requirement level of the document in which they are used. In this case, that it a soft fork, meaning that node implementations MAY ignore this BIP entirely, including all of its requirements.
 
 ## Abstract
 
