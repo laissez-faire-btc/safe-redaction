@@ -35,16 +35,16 @@ The elements of the Redaction Statement workflow (including writing, mining, con
 
 Bitcoin is money for everybody, but the current rules require that to be a full participant, to run an archival node, to contribute to the resilience of the network, to be entirely self sufficient, you must be willing to hold any arbitrary data that is mined, no matter how objectionable. There are, no doubt, people and businesses who would like to join the network, but will not do so under these rules, because they cannot currently do so safely.
 
-This BIP aims to provide a safe means to redact objectionable content according to the following design goals:
+This BIP provides a safe means to redact objectionable content, in line with the following design goals:
 
-* optional - each node gets to decide what to remove, if anything 
+* optional - each node gets to decide what to redact, if anything 
 * safe - provably no harm is done to those not choosing to use it, and any cost or risk to those using it is well understood, minimal, and mitigated
-* full node functionality - a node that does remove content can still do everything it could have done otherwise, without relying on anyone else
-* retrospective - content that exists on the blockchain today (pre-implementation) can be removed later (post-implementation)
-* trustless, verifiable, permissionless - control messages enabling data to be removed are simple verifiable statements of fact that can be written by anybody
+* full node functionality - a node that does redact content can still do everything it could have done otherwise, without relying on anyone else
+* retrospective - content that exists on the blockchain today (pre-implementation) can be redacted later (post-implementation)
+* trustless, verifiable, permissionless - Redaction Statements enabling data to be redacted are simple verifiable statements of fact that can be written by anybody
 * lightweight - minimal changes and impact to policy, consensus, implementation, usage, the economy
-* granularity, associativity, commutability, idempotence - the least possible data is removed, and ordering is inconsequential
-* transferable - nodes that choose to remove objectionable content can share those blocks (with content removed) with others who hold the same objection, so that the receiver may never even momentarily hold the objectionable content
+* granularity, associativity, commutability, idempotence - the least possible data is redacted, and the ordering of Redaction Statements is inconsequential
+* transferable - nodes that choose to redact objectionable content can share those blocks (with content removed) with others who hold the same objection, so that the receiver may never even momentarily hold the objectionable content
 
 ~One of Bitcoin's great strengths is being permissionless and uncensorable. But that can also be a bit of a problem.~
 
