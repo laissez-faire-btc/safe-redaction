@@ -41,8 +41,6 @@ In practice, this means that *absolutely any data* can be written to the blockch
 
 An archival node can only be run by a person who is comfortable with this, and comfortable with holding the data currently embedded in the blockchain - according to their conscience, and according to their local laws and/or law enforcement.
 
-People don't generally want to maximise the amount of arbitrary data they are holding on their nodes at other people's request, but (as of 2025) this is the only way to run a node. Take it or leave it. Bitcoin users are okay with this, because the benefits greatly outweigh the costs.
-
 * illegal content
 * immoral and abhorrent content
 * information hazards
