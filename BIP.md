@@ -8,6 +8,7 @@
   Assigned: ? (unassigned)
   Licence: CC0-1.0 OR MIT-0
   Discussion:
+    2025-12-26: https://discord.gg/DPXKfd9K3s
     2025-12-06: https://gnusha.org/pi/bitcoindev/CABHzxrjfvyBRD7sG9rngvDhr9cfzLEQibn4bup_J8pz7UHQpqA@mail.gmail.com/T/
     2025-11-20: https://gnusha.org/pi/bitcoindev/aTl8Y7p4qtYAsHbP@petertodd.org/T/
   Version: 0.0.0
