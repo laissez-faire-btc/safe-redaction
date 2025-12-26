@@ -33,6 +33,8 @@ The elements of the Redaction Statement workflow (including writing, mining, con
 
 **What issue does Safe Redaction address?**
 
+Bitcoin is money for everybody, but the current rules require that to be a full participant, to run an archival node, to contribute to the resilience of the network, to be entirely self sufficient, you must be willing to hold any arbitrary data that is mined, no matter how objectionable. There are, no doubt, people and businesses who would like to join the network, but will not do so under these current rules, because they cannot currently do so safely.
+
 One of Bitcoin's great strengths is being permissionless and uncensorable. But that can also be a bit of a problem.
 
 The status quo is this: if you want to get some data into the blockchain, there is no restriction. You just follow the rules, and you pay by the byte, at market rates. But if you want to get some data removed, that's a hard fork. Now you need 51% of the miners to agree to a new rule: that this specific data is not allowed in the blockchain. You'll need to roll back to the block before it was mined, too.
