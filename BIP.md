@@ -33,7 +33,7 @@ The elements of the Redaction Statement workflow (including writing, mining, con
 
 **What problem does Safe Redaction address?**
 
-Bitcoin is money for everybody, but the current rules require that to be a full participant, to run an archival node, to contribute to the resilience of the network, to be entirely self sufficient, you must be willing to hold any arbitrary data that is mined, no matter how objectionable. There are, no doubt, people and businesses who would like to join the network, but will not do so under these rules, because they cannot currently do so safely.
+Bitcoin is money for everybody, but the current rules require that to be a full participant, you must be willing to hold any arbitrary data that is mined, no matter how objectionable. There are, no doubt, people and businesses who would like to join the network, but will not do so under these rules, because they cannot currently do so safely.
 
 **How does Safe Redaction improve things?**
 
