@@ -52,6 +52,15 @@ This BIP provides a means to remove objectionable content from a node, with mini
 
 **How does Safe Redaction work?**
 
+The proposal includes the following elements:
+
+* A new data format for a *Redaction Statement*, which can tell a node how to safely redact some data out of an earlier transaction, while still allowing the node to validate the now-redacted transaction.
+* A description of the *Redaction Operation*, which is where a node applies a Redaction Statement to redact data out of the node's local copy of the blockchain.
+* A new *Consensus Rule*, to disallow a Redaction Statement if the statement does not correctly express a safe Redaction Operation, with a description of how a Redaction Statement can be written into a transaction, signed, broadcast, validated,  mined, and confirmed in line with other transaction types.
+* A description of the process by which nodes can share redacted data with other nodes, for example as part of initial block download.
+
+
+
 ## Security Implications ##
 
 **What's the impact on security? What new attacks are possible, and can they be mitigated?**
