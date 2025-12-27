@@ -37,7 +37,7 @@ Bitcoin is money for everybody, but the current rules require that to be a full 
 
 **How does Safe Redaction improve things?**
 
-This BIP provides a means to redact objectionable content, with minimal impact, in line with the following design goals:
+This BIP provides a means to remove objectionable content from a node, with minimal impact, in line with the following design goals:
 
 * optional - each node gets to decide what to redact, if anything 
 * safe - provably no harm is done to those not choosing to use it, and any cost or risk to those using it is well understood, minimal, and mitigated
