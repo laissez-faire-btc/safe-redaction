@@ -62,6 +62,25 @@ The proposal includes the following elements:
 
 **Modifying Signed Data**
 
+To recap how digital signatures work in Bitcoin...
+
+How data is signed:
+
+* the data to be signed is first hashed
+* the hash of the data is then input to the signing algorithm, along with a private key, to produce the signature data
+
+How a signature is verified: 
+
+* the signed data is first hashed 
+* the hash of the data is then input to the signature verification algorithm, along with a public key, to assess whether the signature is valid for the given hash, and given key 
+
+If the signature verifies, it tells you some facts about exactly what happened in the original signing operation that created the signature data: 
+
+*
+
+
+, the signature data confirms that a hash of
+
 **The Redaction Statement**
 
 **The Consensus Rule**
