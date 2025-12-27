@@ -81,9 +81,19 @@ If the signature verifies, it tells you some facts about exactly what happened i
 
 Crucially, note that if you hold the hash and the public key, you can verify the signature without the original data. The reason we normally need the original data, is because it's normally the only way to verify that the statements made in the original data were committed to by the holder of the private key. You hash the data, and use the hash to verify the signature.
 
+The Redaction Statements we will create will provide both the original hash of the unmodified data, and the updated hash of the redacted data. Then, with only the Redaction Statement and the redacted data, it is possible to verify the correctness of the redacted data, while also verifying that the original unmodified data was properly signed. This is performed as follows: 
+
+* hash the current (redacted) data, and confirm it matches the expected value provided in the Redaction Statement
+* retrieve the original hash value (for the unredacted data) from the redaction statement 
+* use this original hash value to verify the signature, confirming that the original (unredacted) data was properly signed
+
 **The Redaction Statement**
 
+TODO
+
 **The Consensus Rule**
+
+TODO
 
 ## Security Implications ##
 
@@ -109,15 +119,23 @@ This proposal doesn't impose any definition of objectionable content on anyone, 
 
 The rest of this section is reserved for sharing, discussing and addressing concerns about this BIP. You can help by sharing, discussing or addressing concerns - either on [the Discord server](https://discord.gg/DPXKfd9K3s), or on the mailing list.
 
+TODO
+
 ## Backward Compatibility
 
 **How will activation work, and how will we know it has happened?**
 
+TODO
+
 **How will existing nodes and existing blocks handle this?**
+
+TODO
 
 ## Reference Implementation
 
 **Has this been implemented, in any way, shape or form?**
+
+TODO
 
 ## Changelog
 
