@@ -84,7 +84,7 @@ Crucially, note that if you hold the hash and the public key, you can verify the
 The Redaction Statements we will create will provide both the original hash of the unmodified data, and the updated hash of the redacted data. Then, with only the Redaction Statement and the redacted data, it is possible to verify the correctness of the redacted data, while also verifying that the original unmodified data was properly signed. This is performed as follows: 
 
 * hash the current (redacted) data, and confirm it matches the expected value provided in the Redaction Statement
-* retrieve the original hash value (for the unredacted data) from the redaction statement 
+* retrieve the original hash value (for the unredacted data) from the Redaction Statement 
 * use this original hash value to verify the signature, confirming that the original (unredacted) data was properly signed
 
 **The Redaction Statement**
