@@ -12,7 +12,7 @@
     2025-12-06: https://gnusha.org/pi/bitcoindev/CABHzxrjfvyBRD7sG9rngvDhr9cfzLEQibn4bup_J8pz7UHQpqA@mail.gmail.com/T/
     2025-11-20: https://gnusha.org/pi/bitcoindev/aTl8Y7p4qtYAsHbP@petertodd.org/T/
   Version: 0.0.0
-  Requires: 3
+  Requires: 3, 143, 340
 ```
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119).
@@ -89,7 +89,21 @@ The Redaction Statements we will create will attest to both the original hash of
 
 **The Redaction Statement**
 
-TODO
+```
+<redaction-statement> ::= <uuid> <transaction-hash> <data-segment-list> <transaction-hash-update> <signature-hash-update-list>
+```
+
+Where loosely speaking:
+* `<redaction-statement>` = the Redaction Statement, which is all the information needed to safely apply a redaction to a transaction, or to later validate that redacted transaction
+* `<uuid>` = a specific 16 byte value used (only and always) to signify that this data is a redaction statement
+* `<transaction-hash>` = the id of the transaction being modified
+* `<data-segment-list>` = a sequence of pairs of numbers, each pair being first the index of the first byte to delete, and second the number of bytes to delete - with the entire list prepended with the length of the list 
+* `<transaction-hash-update>` = the new transaction hash (transaction id)
+* `<signature-hash-update-list>` = a list of pairs of sighashes, each being first the sighash of the original (unredacted) data, then the sighash of the updated (redacted) data, to be used for one signature in the transaction
+
+The `<redaction-statement>` does not explicitly include the length of the `<signature-hash-update-list>`. The length of this list is implied. The list includes every signature in the transaction that is altered by the specified redaction, and none of the signatures that do not change.
+
+Of course, we may run into trouble when a redaction specifies a zero byte change, or changes a 0 byte to a 0 byte, effectively doing nothing. When validating or applying a Redaction Statement, you would know not to include some signatures. But when validating a redacted transaction, you would not know! So therefore, let us require that A) each element of `<data-segment-list>` must alter at least one byte, and B) each element of `<data-segment-list>` must be entirely contained within an input, or within an output.
 
 **The Consensus Rule**
 
