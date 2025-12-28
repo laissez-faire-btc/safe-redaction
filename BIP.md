@@ -62,14 +62,14 @@ The proposal includes the following elements:
 
 **Modifying Signed Data**
 
-To recap how digital signatures work in Bitcoin...
+This section starts with a recap of how digital signatures work in Bitcoin, and then describes how we can change this process to work for redacted data.
 
-How data is signed:
+How data is signed, in general:
 
 * the data to be signed is first hashed
 * the hash of the data is then input to the signing algorithm, along with a private key, to produce the signature data
 
-How a signature is verified: 
+How a signature is verified, in general: 
 
 * the signed data is first hashed 
 * the hash of the data is then input to the signature verification algorithm, along with a public key, to assess whether the signature is valid for the given hash, and given key 
@@ -81,11 +81,11 @@ If the signature verifies, it tells you some facts about exactly what happened i
 
 Crucially, note that if you hold the hash and the public key, you can verify the signature without the original data. The reason we normally need the original data, is because it's normally the only way to verify that the statements made in the original data were committed to by the holder of the private key. You hash the data, and use the hash to verify the signature.
 
-The Redaction Statements we will create will provide both the original hash of the unmodified data, and the updated hash of the redacted data. Then, with only the Redaction Statement and the redacted data, it is possible to verify the correctness of the redacted data, while also verifying that the original unmodified data was properly signed. This is performed as follows: 
+The Redaction Statements we will create will attest to both the original hash of the unmodified data, and the updated hash of the redacted data. Then, with only the Redaction Statement and the redacted data, it is possible to verify the correctness of the redacted data, while also verifying that the original unmodified data was properly signed. This is performed as follows: 
 
 * hash the current (redacted) data, and confirm it matches the expected value provided in the Redaction Statement
 * retrieve the original hash value (for the unredacted data) from the Redaction Statement 
-* use this original hash value to verify the signature, confirming that the original (unredacted) data was properly signed
+* use this original hash value to verify the signature, confirming that the original (unredacted) data was properly signed (even though we may not see it)
 
 **The Redaction Statement**
 
@@ -99,7 +99,7 @@ TODO
 
 **What's the impact on security? What new attacks are possible, and can they be mitigated?**
 
-After the soft fork adopting this BIP, a new *Redaction Attack* becomes possible, targeting unsuspecting nodes. It requires a node that is willing to adopt a specific redaction, without seeing the original data, during initial block download (IBD), and 51% of the hashing power of the network.
+After the soft fork adopting this BIP, a new *Redaction Attack* becomes possible, targeting unsuspecting nodes. It requires a victim node that is willing to adopt a specific redaction, without seeing the original data, during initial block download (IBD), and the attacker must have 51% of the hashing power of the network.
 
 * Step 1: Maliciously modify an existing transaction (*T1*).
 * Step 2: Create an unsafe Redaction Statement, falsely claiming that T1 can safely be redacted, and that the updated hash matches the maliciously modified T1.
