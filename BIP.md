@@ -144,7 +144,7 @@ It works, it's simple to implement, and it's a soft fork.
 
 OP_SUCCESSx and similar upgradable opcodes work by being committed to in the output of one transaction, and then revealed in the input of another transaction. That requires two transactions to publish the Redaction Statement to the blockchain. Whereas OP_RETURN can be put into the output of any transaction, as a one off.
 
-**Why not use witness v2 script, that's intended for future soft forks?**
+**Why not use Witness Version 2 script, that's intended for future soft forks?**
 
 That would be overkill.
 
@@ -168,7 +168,7 @@ TODO
 
 **Has this been implemented, in any way, shape or form?**
 
-TODO
+No.
 
 ## Changelog
 
