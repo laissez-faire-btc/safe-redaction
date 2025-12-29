@@ -142,6 +142,10 @@ After the soft fork adopting this BIP, a new *Redaction Attack* becomes possible
 
 This proposal doesn't impose any definition of objectionable content on anyone, or any process for determining what should count as objectionable. This is entirely up to each individual to decide for themself.
 
+**Why not support further redaction of a redacted transaction?**
+
+This would introduce additional complexity, and put additional burden on validators. 
+
 **Why use OP_RETURN to store the Redaction Statement?**
 
 It works, it's simple to implement, and it's a soft fork.
