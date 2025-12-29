@@ -136,6 +136,18 @@ After the soft fork adopting this BIP, a new *Redaction Attack* becomes possible
 
 This proposal doesn't impose any definition of objectionable content on anyone, or any process for determining what should count as objectionable. This is entirely up to each individual to decide for themself.
 
+**Why use OP_RETURN to store the Redaction Statement?**
+
+It works, it's simple to implement, and it's a soft fork.
+
+**Why not use a new opcode like OP_SUCCESSx, that's intended for future soft forks like this?**
+
+OP_SUCCESSx and similar upgradable opcodes work by being committed to in the output of one transaction, and then revealed in the input of another transaction. That requires two transactions to publish the Redaction Statement to the blockchain. Whereas OP_RETURN can be put into the output of any transaction, as a one off.
+
+**Why not use witness v2 script, that's intended for future soft forks?**
+
+That would be overkill.
+
 **Concerns Raised**
 
 The rest of this section is reserved for sharing, discussing and addressing concerns about this BIP. You can help by sharing, discussing or addressing concerns - either on [the Discord server](https://discord.gg/DPXKfd9K3s), or on the mailing list.
