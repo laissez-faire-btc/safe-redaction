@@ -136,13 +136,14 @@ To be a consensus-valid Redaction Statement, the output MUST also be a valid out
 
 When considering Category 1 (valid Redaction Statements), the following requirements are applied: 
 
-* `<transaction-hash>` MUST be a valid transaction id.
-* `<uuid>` MUST be the specific 16 byte value representing Redaction Statements, as defined in this BIP.
-* `<data-segment-list>` MUST NOT include any invalid byte indices or segment lengths. 
-* `<data-segment-list>` MUST NOT include any segment that is not either wholly contained within a single input, or wholly contained within a single output.
-* `<transaction-hash-updated>` MUST be equal to the hash of the transaction after all of the bytes specified by `<data-segment-list>` are changed to 0x00, with no other changes.
-* `<signature-hash-update-list>` MUST include before-and-after (unredacted and redacted) sighashes for each signature that is invalidated by the redaction, and MUST NOT include any other sighashes.
-* The Redaction Statement MUST NOT include any further data after the `<signature-hash-update-list>`
+1. `<transaction-hash>` MUST be a valid transaction id.
+2. `<uuid>` MUST be the specific 16 byte value representing Redaction Statements, as defined in this BIP.
+3. `<data-segment-list>` MUST NOT include any invalid byte indices or segment lengths. 
+4. each segment in `<data-segment-list>` MUST be either wholly contained within a single input, or wholly contained within a single output.
+5. each segment in `<data-segment-list>` MUST redact at least one non-zero byte.
+6. `<transaction-hash-updated>` MUST be equal to the hash of the transaction after all of the bytes specified by `<data-segment-list>` are changed to 0x00, with no other changes.
+7. `<signature-hash-update-list>` MUST include before-and-after (unredacted and redacted) sighashes for each signature that is invalidated by the redaction, and MUST NOT include any other sighashes.
+8. The Redaction Statement MUST NOT include any further data after the `<signature-hash-update-list>`
 
 **Sharing Redacted Data**
 
