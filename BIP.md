@@ -167,7 +167,7 @@ After the soft fork adopting this BIP, a new *Redaction Attack* becomes possible
 
 **Why is this the right solution to the problem?**
 
-This proposal doesn't impose any definition of objectionable content on anyone, or any process for determining what should count as objectionable. This is entirely up to each individual to decide for themself.
+Unlike other redaction proposals, this doesn't impose any definition of objectionable content on anyone, or any process for determining what should count as objectionable. This is entirely up to each individual to decide for themself.
 
 **Why not support further redaction of a redacted transaction?**
 
