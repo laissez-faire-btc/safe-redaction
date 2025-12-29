@@ -97,7 +97,7 @@ Where loosely speaking:
 * `<redaction-statement>` = the Redaction Statement, which is all the information needed to safely apply a redaction to a transaction, or to later validate that redacted transaction
 * `<uuid>` = a specific 16 byte value used (only and always) to signify that this data is a redaction statement
 * `<transaction-hash>` = the id of the transaction being modified
-* `<data-segment-list>` = a sequence of pairs of numbers, each pair being first the index of the first byte to delete, and second the number of bytes to delete - with the entire list prepended with the length of the list 
+* `<data-segment-list>` = a sequence of pairs of numbers, each pair being first the index of the first byte to redact, and second the number of bytes to redact - with the entire list prepended with the length of the list (two bytes, little endian)
 * `<transaction-hash-updated>` = the new transaction hash (transaction id)
 * `<signature-hash-update-list>` = a list of pairs of sighashes, `<sighash-original> <sighash-updated>`, each being first the sighash of the original (unredacted) data, then the sighash of the updated (redacted) data, to be used for one signature in the transaction
 
@@ -122,9 +122,9 @@ It is not supported to apply a redaction to an already-redacted transaction. How
 
 **The Consensus Rule**
 
-Redaction Statements are stored in OP_RETURN data. This BIP disallows some specific OP_RETURN output scripts.
+Redaction Statements are stored in OP_RETURN data. This BIP disallows some specific OP_RETURN output scripts, where they represent unsafe redactions.
 
-This BIP changes the interpretation of OP_RETURN outputs separating them into three categories:
+This BIP changes the interpretation of OP_RETURN outputs, separating them into three categories with different handling:
 
 Category 1: a valid Redaction Statement. If the data embedded in OP_RETURN starts with the well known magic number `<uuid>`, and if the Redaction Statement is well formed and represents true facts about a safe redaction, then this is a valid output. 
 
@@ -137,6 +137,16 @@ Precisely, Categories 1 and 2 cover only outputs with scripts that start with th
 `OP_RETURN OP_PUSHDATA2 <byte> <byte> <uuid> ...`
 
 To be a consensus-valid Redaction Statement, the output MUST also be a valid output under general consensus rules.
+
+When considering Category 1 (valid Redaction Statements), the following requirements are applied: 
+
+* `<transaction-hash>` MUST be a valid transaction id.
+* `<uuid>` MUST be the specific 16 byte value representing Redaction Statements, as defined in this BIP.
+* `<data-segment-list>` MUST NOT include any invalid byte indices or segment lengths. 
+* `<data-segment-list>` MUST NOT include any segment that is not either wholly contained within a single input, or wholly contained within a single output.
+* `<transaction-hash-updated>` MUST be equal to the hash of the transaction after all of the bytes specified by `<data-segment-list>` are changed to 0x00, with no other changes.
+* `<signature-hash-update-list>` MUST include before-and-after (unredacted and redacted) sighashes for each signature that is invalidated by the redaction, and MUST NOT include any other sighashes.
+* The Redaction Statement MUST NOT include any further data after the `<signature-hash-update-list>`
 
 ## Security Implications ##
 
