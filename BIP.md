@@ -114,7 +114,7 @@ The semantics of the Redaction Statement are as follows:
 * The redaction is to be applied to the transaction specified by `<transaction-hash>`.
 * To apply the redaction, change all bytes specified by `<data-segment-list>` to 0x00.
 * After applying the redaction, the new hash of the redacted transaction will be `<transaction-hash-updated>`. Meanwhile, the original `<>` can still be used to refer to this transaction (for example, in future transaction inputs), search for this transaction, and in this block's Merkel tree.
-* After the redaction is applied, where `<sighash-updated>` is found to be the input for signature verification, it can safely be replaced by `<sighash-original>` for signature verification purposes, and, if valid, this confirms that the redaction specified in `<data-segment-list>` has been applied to the parts of this transaction that are committed to by this sighash.
+* After the redaction is applied, where `<sighash-updated>` is found to be the input for signature verification in this transaction, it can safely be replaced by `<sighash-original>` for signature verification purposes. If the signature is a valid signature for `<sighash-original>`, this confirms that the only changes to the parts of this transaction that are committed to by this sighash, since signing, are the redaction specified in `<data-segment-list>`.
 
 **Further Redaction For A Redacted Transaction**
 
