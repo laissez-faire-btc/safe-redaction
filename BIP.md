@@ -144,7 +144,7 @@ This proposal doesn't impose any definition of objectionable content on anyone, 
 
 **Why not support further redaction of a redacted transaction?**
 
-This would introduce additional complexity, and put additional burden on validators. 
+This would introduce additional complexity, and put additional burden on validators. Such support is also unnecessary, because it's possible to replace a redacted transaction with a different redacted transaction, that applies a different Redaction Statement.
 
 **Why use OP_RETURN to store the Redaction Statement?**
 
