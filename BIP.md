@@ -109,8 +109,13 @@ Alternatively, we specify where changes are made, and this determines which sign
 
 The semantics of the Redaction Statement are as follows: 
 
-* To apply the Redaction Statement, change all bytes specified by `<data-segment-list>` to 0x00.
-* TODO
+* The redaction MAY be applied to the transaction specified by `<transaction-hash>`. The redaction MUST NOT be applied to any other transaction. 
+* To apply the redaction, change all bytes specified by `<data-segment-list>` to 0x00.
+* After applying the redaction, the new hash of the redacted transaction will be `<transaction-hash-update>`.
+
+**Further Redaction For A Redacted Transaction**
+
+TODO
 
 **The Consensus Rule**
 
@@ -150,7 +155,7 @@ That would be overkill.
 
 **Concerns Raised**
 
-The rest of this section is reserved for sharing, discussing and addressing concerns about this BIP. You can help by sharing, discussing or addressing concerns - either on [the Discord server](https://discord.gg/DPXKfd9K3s), or on the mailing list.
+The rest of this section is reserved for sharing, discussing and addressing concerns about this BIP. You can help by sharing, discussing or addressing concerns - on [the Discord server](https://discord.gg/DPXKfd9K3s), on the mailing list, or directly.
 
 TODO
 
