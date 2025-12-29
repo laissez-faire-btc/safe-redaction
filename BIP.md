@@ -147,7 +147,15 @@ When considering Category 1 (valid Redaction Statements), the following requirem
 
 **Sharing Redacted Data**
 
-TODO
+A redacted block could be shared, under a few conditions: 
+
+* The recipient would need to know that the block is redacted. Otherwise, it will trivially be rejected.
+* The recipient would need to agree to the redaction, and accept the redacted block.
+* The recipient would need to provisionally accept the redacted block, pending confirmation that a valid Redaction Statement exists later in the blockchain. 
+
+Because these processes don't affect the consensus layer, they are out of scope for this BIP.
+
+Note that the process of replacing a light redaction with a heavier redaction is essentially the same process: you don't have the unredacted transaction, so you are relying on the consensus mechanism to confirm the validity of the replacement (heavily redacted) transaction.
 
 ## Security Implications ##
 
