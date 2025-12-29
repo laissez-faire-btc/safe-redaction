@@ -103,10 +103,6 @@ Where loosely speaking:
 
 The `<redaction-statement>` does not explicitly include the length of the `<signature-hash-update-list>`. The length of this list is implied. The list includes every signature in the transaction that is altered by the specified redaction, and none of the signatures that do not change.
 
-Of course, we may run into trouble when a redaction specifies a zero byte change, or changes a 0 byte to a 0 byte, effectively doing nothing. When validating or applying a Redaction Statement, you would know not to include some signatures. But when validating a redacted transaction, you would not know! So therefore, let us require that A) each element of `<data-segment-list>` must alter at least one byte, and B) each element of `<data-segment-list>` must be entirely contained within an input, or within an output.
-
-Alternatively, we specify where changes are made, and this determines which signatures are included - even if they are unchanged!
-
 **The Redaction Operation**
 
 The semantics of the Redaction Statement are as follows: 
@@ -147,6 +143,10 @@ When considering Category 1 (valid Redaction Statements), the following requirem
 * `<transaction-hash-updated>` MUST be equal to the hash of the transaction after all of the bytes specified by `<data-segment-list>` are changed to 0x00, with no other changes.
 * `<signature-hash-update-list>` MUST include before-and-after (unredacted and redacted) sighashes for each signature that is invalidated by the redaction, and MUST NOT include any other sighashes.
 * The Redaction Statement MUST NOT include any further data after the `<signature-hash-update-list>`
+
+**Sharing Redacted Data**
+
+TODO
 
 ## Security Implications ##
 
