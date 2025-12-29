@@ -93,7 +93,7 @@ The Redaction Statements we will create will attest to both the original hash of
 <redaction-statement> ::= <uuid> <transaction-hash> <data-segment-list> <transaction-hash-update> <signature-hash-update-list>
 ```
 
-Where loosely speaking:
+Where:
 * `<redaction-statement>` = the Redaction Statement, which is all the information needed to safely apply a redaction to a transaction, or to later validate that redacted transaction
 * `<uuid>` = a specific 16 byte value used (only and always) to signify that this data is a redaction statement
 * `<transaction-hash>` = the id of the transaction being modified
