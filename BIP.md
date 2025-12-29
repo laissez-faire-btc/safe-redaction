@@ -118,7 +118,7 @@ The semantics of the Redaction Statement are as follows:
 
 **Further Redaction For A Redacted Transaction**
 
-It is not supported to apply a redaction to an already-redacted transaction. However, it is supported to have two redaction statements that specify the same transaction. In this way, a heavier redaction can replace a lighter one.
+It is not supported to apply a redaction to an already-redacted transaction. However, it is supported to have two Redaction Statements that specify the same transaction. In this way, a heavier redaction can entirely replace a lighter one. The node operator has the option to apply either, or neither, but not both.
 
 **The Consensus Rule**
 
