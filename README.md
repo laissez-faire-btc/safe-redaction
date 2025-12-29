@@ -1,4 +1,4 @@
-# a safe way to remove objectionable content from the blockchain
+# a safe way to redact objectionable content from the blockchain
 
 **Abstract**
 
