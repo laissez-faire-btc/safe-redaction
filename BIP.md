@@ -130,9 +130,9 @@ Category 1: a valid Redaction Statement. If the data embedded in OP_RETURN start
 
 Category 2: an invalid Redaction Statement. If the data embedded in OP_RETURN starts with the well known magic number `<uuid>`, and if the Redaction Statement either is not well formed, or represents untrue statements about a redaction, then this is a invalid transaction. 
 
-Category 3: not a Redaction Statement. If the data embedded in OP_RETURN does not starts with the well known magic number `<uuid>`, then this BIP does not apply. 
+Category 3: not a Redaction Statement. If the data embedded in OP_RETURN does not start with the well known magic number `<uuid>`, then this BIP does not apply. 
 
-Precisely, Categories 1 and 2 cover only outputs with scripts that start with the following data. Anything else is Category 3.
+Precisely, Categories 1 and 2 cover only outputs with scripts that start with the following data. Anything else is considered to be in Category 3.
 
 `OP_RETURN OP_PUSHDATA2 <byte> <byte> <uuid> ...`
 
