@@ -2,104 +2,21 @@
 
 **Abstract**
 
-This is a proposal to enable the redaction of objectionable content from the blockchain. Each node can choose for themself what to redact, without trusting any third party. The proposal is available as a soft fork. Almost any data can be redacted from the blockchain, including historical data that pre-dates implementation of this proposal. Redacted blocks can be shared as part of initial block downloads, with peers that share the same view of objectionable content. In this sense, a node with a redacted blockchain can continue to operate as a archival node.
+This Specification BIP defines a new type of transaction output to enable nodes to safely and robustly redact objectionable content from the blockchain (within reason).
 
-**Motivation**
+Any participant MAY write a _Redaction Statement_ to the blockchain. A Redaction Statement specifies which bytes of data will be redacted from the blockchain, and exactly how to safely redact those bytes. Once this is committed to the blockchain, any participant MAY apply the Redaction Statement to safely redact the specified content from their node.
 
-I propose two changes to Bitcoin, one at the consensus level, and one at the client level. The purpose of these changes is to support filtering of objectionable content after the content has been mined, allowing each node operator to maintain only that data they find agreeable. In so doing, my hope is that we can address everyone's greatest concerns, for a consensus resolution.
+Where two participants wish to redact the same content, redacted data MAY be shared between nodes, in redacted form; for example, as part of an initial block download.
 
-I do however acknowledge those people that want to stop miners from mining non-monetary transactions, because of the data storage and processing cost, and I recognised that this proposal does not address those concerns.
+The elements of the Redaction Statement workflow (including writing, mining, confirming, applying and sharing redaction statements) are each verifiable, trustless operations, that do not rely on any third party or authority.
 
-**Motivation**
-
-You can't just change or delete some data from the blockchain, because a hash of each transaction is in the transaction signature, and a hash of each block is in the next block. If you change the data, you change the hashes, and you break things.
-
-The design presented here is an attempt to achieve a compromise, where a person can have all of the benefits of running a full archival node, including the integrity of the ledger, yet without storing the objectionable content - and importantly without even being able to recreate that objectionable content from what data they still have.
-
-**Preliminary**
-
-Objectionable content is defined here as whatever you decide it is, and two users don't have to share the same views. One person might object to copyrighted material used without permission, another a negative depiction of the prophet Muhammad, and another video of the sexual abuse of children. The design presented below lets each person decide what to remove for themself (if anything), while those who want everything still have it all.
-
-**Solution**
-
-If you take some arbitrary data that's in a transaction, written into the blockchain, and you change part of it (e.g. by replacing data with all zeros) to remove some objectionable content, then you also change any hash that it's been used in. For example, that might be signatures in transaction inputs, or a transaction hash in a block's Merkel tree.
-
-The solution presented below is based on two ideas, both aimed at maintaining data and signature integrity through hashing, while changing some of the hash's input data.
-
-**First idea**
-
-If you know that changing the data from D to D' changes the hash from H to H', and if you confirm that D' hashes to H', then you know that H is the correct hash of the original data D, even without seeing D. If you know all that, then you can safely update D to D', removing the objectionable content. You can still confirm that the only thing that changed was the change you knew about. With that knowledge you can continue to validate a signature, or you can use the original hash in construction of a Merkel tree.
-
-Of course that's a big 'if', at the beginning of that paragraph. That 'if' is doing a lot of work.
-
-The easiest way to obtain D' and H' securely is to generate them yourself: update D to D' to remove the objectionable content; hash D' into H' (while keeping a copy of H). But that has multiple problems. You have to hold the objectionable data, at least for a time. There's also no evidence that the original D ever hashed to H, beyond the fact that you hold D' and H'. You certainly don't have any evidence that could be shared and used by anyone else.
-
-But what if instead, we could share H' across the network, and do it securely and verifiably, and in a way where up to 100% of nodes could choose to make this change to D, permanently, without breaking anything?
-
-**Second idea**
-
-It may seem like there is no one you can trust to tell you what H' is. There is only one source of data that a Bitcoin node can trust, and that is the blockchain, as mined by miners, with the most proof of work, and verified locally. Therefore, the second idea is that H' can be trusted if (and only if) it is written into the blockchain, and verified by the network.
-
-For example, we write data to the semantic effect of "In Transaction X: changing data (to all zeros) between byte offset A and byte offset B has the effect of changing the transaction hash to H', and the transaction signatures' signed hash values to S1', S2' ... Sn'." Miners then validate and mine this statement into a block, and verifiers confirm that it is cryptographically accurate with respect to the data in Transaction X, as described - or else they drop the new block as invalid.
-
-Once this statement is established in the blockchain, any node can choose to redact (change to all zeros) the data between A and B in Transaction X. This can now be done with confidence because they can double check the accuracy, and the impact on the ledger, before they redact the data. After that they may also be able to share (with the agreement of the receiving node) Transaction X as part of initial block downloads - along with H', S1', S2' ... Sn' - to any other nodes that don't want the objectionable content. The receiving nodes wouldn't immediately and necessarily be able to verify and rely on H' etc., but they would eventually, once they have the full blockchain.
-
-**Putting it all together**
-
-Here's some very loose pseudocode showing the steps to redact the objectionable content:
-```
-1. write the following to the blockchain:
-1.a) the transaction (T) to be changed 
-1.b) the exact data (D) to be changed, specified
-by byte offset, and length (or multiple byte
-offsets, and lengths)
-1.c) the current hash (H) of T
-1.d) the new hash (H') of T, after D is changed
-1.e) for any signatures that sign D (for example, 
-signatures in transaction inputs), the current 
-hash (S) and the new hash (S') of that signed 
-data (the signed data includes D, but the hash of 
-the signed data is different to the hash of D, 
-and different to the hash of T)
-2. miners and validators check that this 
-represents a true statement about T, D, H, H', S, 
-S', and the change is safe (e.g. it is arbitrary 
-data, not structural or cryptographic), and it is written into a block
-3. a client sees this redaction and chooses to use it, additionally confirming that the redaction is valid and safe
-4. a client may further share this transaction or 
-this block in future, in its altered state, along 
-with the information necessary to validate it in 
-its altered state (which will be found and can be 
-confirmed later in the blockchain)
-```
-
-**Soft fork concept**
-
-To implement this as a soft fork, by definition, we need to find a way to write this new data to the blockchain in a format that current nodes will accept, without understanding the new semantics. That's actually easy in this case, because this aligns with one of the design goals anyway: redactions are optional for nodes, and can be safely ignored.
-
-One way we might do that is to use OP_RETURN to store redaction statements. Then, any data that is a well-formed redaction statement is not allowed to contain false statements about transaction hashes. True statements are still allowed, as is any arbitrary data that does not conform to the definition of a well-formed redaction statement.
-
-Because this is purely a restriction on otherwise-acceptable transactions, this would be a soft fork.
-
-Here is a concrete example of how we might differentiate well formed redaction statements from other arbitrary data.
-
-```
-<redaction-statement> ::= <uuid> <transaction-id> <data-segment-list> <transaction-hash-update> <signature-hash-update-list>
-```
-
-Where loosely speaking:
-* `<redaction-statement>` = the entire contents of an op return output's data pushes
-* `<uuid>` = a specific 16 byte value used (only and always) to signify that this data is a redaction statement
-* `<transaction-id>` = the id of the transaction being modified
-* `<data-segment-list>` = a sequence of pairs of numbers, each pair being first the index of the first byte to delete, and second the number of bytes to delete - with the entire list prepended with the length of the list 
-* `<transaction-hash-update>` = the new transaction hash (transaction id)
-* `<signature-hash-update-list>` = a list of hashes, each of which is the new hash to be used for one signature in the transaction - not prepended by the length of the list because the data changed (`<data-segment-list>`) is sufficient to uniquely describe exactly which hashes change
+[Read the full draft BIP](./bip-safe-redaction.md)
 
 **FAQs**
 
 **Q1. Isn't this basically just Simplified Payment Verification / BIP 157 / Neutrino?**
 
-The similarity is the reliance on proof of work - but actually all nodes do that. Regular full nodes rely on PoW to order transactions and avoid double spending - which is what gives bitcoin value as money. This solution additionally uses PoW to verify that some data can be safely and securely removed (optionally, of course). SPV nodes rely on PoW to check that a transaction has been verified and accepted by the rest of the network, so that the SPV node doesn't have to store and verify it.
+The similarity is the reliance on proof of work - but actually all node types do that. Regular full nodes rely on PoW to order transactions and avoid double spending - which is what gives bitcoin value as money. This solution additionally uses PoW to verify that some data can be safely and securely removed (optionally, of course). SPV nodes rely on PoW to check that a transaction has been verified and accepted by the rest of the network, so that the SPV node doesn't have to store and verify it.
 
 **Q2. Doesn't this lower security, remove autonomy, and introduce trust?**
 
