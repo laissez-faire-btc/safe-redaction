@@ -45,7 +45,7 @@ This BIP provides a means to remove objectionable content from a node, with mini
 * retrospective - content that exists on the blockchain today (pre-implementation) can be redacted later (post-implementation)
 * trustless, verifiable, permissionless - Redaction Statements enabling data to be redacted are simple verifiable statements of fact that can be written by anybody
 * lightweight - minimal changes and impact to policy, consensus, implementation, usage, the economy
-* granularity, associativity, commutability, idempotence - the least possible data is redacted, and the ordering of Redaction Statements is inconsequential
+* granularity, ~associativity~, commutability, idempotence - the least possible data is redacted, and the ordering of Redaction Statements is inconsequential
 * transferable - nodes that choose to redact objectionable content can share those blocks (with content redacted) with others who hold the same objection, so that the receiver may never even momentarily hold the objectionable content
 
 ## Specification
