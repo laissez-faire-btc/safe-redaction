@@ -107,6 +107,8 @@ Of course, we may run into trouble when a redaction specifies a zero byte change
 
 Alternatively, we specify where changes are made, and this determines which signatures are included - even if they are unchanged!
 
+**The Redaction Operation**
+
 The semantics of the Redaction Statement are as follows: 
 
 * The redaction is to be applied to the transaction specified by `<transaction-hash>`.
