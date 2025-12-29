@@ -155,7 +155,7 @@ A redacted block could be shared, under a few conditions:
 
 Because these processes don't affect the consensus layer, they are out of scope for this BIP.
 
-Note that the process of replacing a light redaction with a heavier redaction is essentially the same process: you don't have the unredacted transaction, so you are relying on the consensus mechanism to confirm the validity of the replacement (heavily redacted) transaction.
+Note that the process of replacing a light redaction with a heavier redaction is essentially the same: you don't have the unredacted transaction, so you are relying on the consensus mechanism to confirm the validity of the replacement (heavily redacted) transaction.
 
 ## Security Implications ##
 
