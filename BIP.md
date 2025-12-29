@@ -217,8 +217,8 @@ No.
 
 ## Changelog
 
-* __v0.0.0__ (2025-12-25):
-  * initial draft
+* __v0.0.0__ (2025-12-29):
+  * initial incomplete draft for discussion
 
 ## Copyright
 
