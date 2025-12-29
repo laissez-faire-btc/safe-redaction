@@ -124,7 +124,7 @@ It is not supported to apply a redaction to an already-redacted transaction. How
 
 Redaction Statements are stored in OP_RETURN data. This BIP disallows some specific OP_RETURN output scripts.
 
-This BIP changes the interpretation of OP_RETURN outputs from one (1) to three (3) separate categories:
+This BIP changes the interpretation of OP_RETURN outputs separating them into three categories:
 
 Category 1: a valid Redaction Statement. If the data embedded in OP_RETURN starts with the well known magic number `<uuid>`, and if the Redaction Statement is well formed and represents true facts about a safe redaction, then this is a valid output. 
 
@@ -135,6 +135,8 @@ Category 3: not a Redaction Statement. If the data embedded in OP_RETURN does no
 Precisely, Categories 1 and 2 cover only outputs with scripts that start with the following data. Anything else is Category 3.
 
 `OP_RETURN OP_PUSHDATA2 <byte> <byte> <uuid> ...`
+
+To be a consensus-valid Redaction Statement, the output MUST also be a valid output under general consensus rules.
 
 ## Security Implications ##
 
