@@ -98,8 +98,8 @@ Where loosely speaking:
 * `<uuid>` = a specific 16 byte value used (only and always) to signify that this data is a redaction statement
 * `<transaction-hash>` = the id of the transaction being modified
 * `<data-segment-list>` = a sequence of pairs of numbers, each pair being first the index of the first byte to delete, and second the number of bytes to delete - with the entire list prepended with the length of the list 
-* `<transaction-hash-update>` = the new transaction hash (transaction id)
-* `<signature-hash-update-list>` = a list of pairs of sighashes, each being first the sighash of the original (unredacted) data, then the sighash of the updated (redacted) data, to be used for one signature in the transaction
+* `<transaction-hash-updated>` = the new transaction hash (transaction id)
+* `<signature-hash-update-list>` = a list of pairs of sighashes, `<sighash-original> <sighash-updated>`, each being first the sighash of the original (unredacted) data, then the sighash of the updated (redacted) data, to be used for one signature in the transaction
 
 The `<redaction-statement>` does not explicitly include the length of the `<signature-hash-update-list>`. The length of this list is implied. The list includes every signature in the transaction that is altered by the specified redaction, and none of the signatures that do not change.
 
@@ -109,9 +109,10 @@ Alternatively, we specify where changes are made, and this determines which sign
 
 The semantics of the Redaction Statement are as follows: 
 
-* The redaction MAY be applied to the transaction specified by `<transaction-hash>`. The redaction MUST NOT be applied to any other transaction. 
+* The redaction is to be applied to the transaction specified by `<transaction-hash>`.
 * To apply the redaction, change all bytes specified by `<data-segment-list>` to 0x00.
-* After applying the redaction, the new hash of the redacted transaction will be `<transaction-hash-update>`.
+* After applying the redaction, the new hash of the redacted transaction will be `<transaction-hash-updated>`.
+* After the redaction is applied, where `<sighash-updated>` is found to be the input for signature verification, it can safely be replaced by `<sighash-original>` for signature verification purposes, and, if valid, this confirms that redaction specified in `<data-segment-list>` has been applied.
 
 **Further Redaction For A Redacted Transaction**
 
