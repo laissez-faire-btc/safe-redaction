@@ -105,7 +105,7 @@ The `<redaction-statement>` does not explicitly include the length of the `<sign
 
 Of course, we may run into trouble when a redaction specifies a zero byte change, or changes a 0 byte to a 0 byte, effectively doing nothing. When validating or applying a Redaction Statement, you would know not to include some signatures. But when validating a redacted transaction, you would not know! So therefore, let us require that A) each element of `<data-segment-list>` must alter at least one byte, and B) each element of `<data-segment-list>` must be entirely contained within an input, or within an output.
 
-Alternatively, we specify where chances are made, and this determines which signatures are included - even if they are unchanged!
+Alternatively, we specify where changes are made, and this determines which signatures are included - even if they are unchanged!
 
 The semantics of the Redaction Statement are as follows: 
 
