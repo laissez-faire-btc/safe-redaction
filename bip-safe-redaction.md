@@ -151,6 +151,10 @@ When considering Category 1 (valid Redaction Statements), the following requirem
 7. `<signature-hash-update-list>` MUST include before-and-after (unredacted and redacted) sighashes for each signature that is invalidated by the redaction, and MUST NOT include any other sighashes.
 8. The Redaction Statement MUST NOT include any further data after the `<signature-hash-update-list>`
 
+**Redacting Tapscript**
+
+TODO
+
 **Sharing Redacted Data**
 
 A redacted block could be shared, under a few conditions: 
