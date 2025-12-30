@@ -153,7 +153,7 @@ When considering Category 1 (valid Redaction Statements), the following requirem
 
 **Redacting Tapscript**
 
-TODO
+TODO: Extend support to modifying Tapscript and updating hashes in Taproot inputs.
 
 **Sharing Redacted Data**
 
