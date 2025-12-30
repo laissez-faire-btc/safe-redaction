@@ -21,7 +21,7 @@ Note that the force of these words is modified by the requirement level of the d
 
 ## Important Note
 
-This is an early draft with *Ideation* status, for community consideration and discussion only. Subject to further development, reflecting community feedback, a future version may be submitted to the BIPs repository for consideration of a *Draft* status and a BIP number, to facilitate a more detailed community discussion of its technical merits and appropriateness for adoption. Based on further clarification, development, implementation and testing, it may one day achieve *Complete* status, indication that it is ready to be considered for consensus adoption.
+This is an early draft with *Ideation* status, for community consideration and discussion only. Subject to further development, reflecting community feedback, a future version may be submitted to the BIPs repository for consideration of a *Draft* status and a BIP number, to facilitate a more detailed community discussion of its technical merits and appropriateness for adoption. Based on further clarification, development, implementation and testing, it may one day achieve *Complete* status, indicating that it is ready to be considered for consensus adoption.
 
 For more on BIP statuses and the BIP workflow, refer to [BIP 3](https://github.com/bitcoin/bips/blob/master/bip-0003.md).
 
