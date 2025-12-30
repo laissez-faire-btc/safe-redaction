@@ -19,6 +19,12 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 Note that the force of these words is modified by the requirement level of the document in which they are used. In this case, that requirement level is a soft fork, meaning that node implementations MAY ignore this BIP entirely, including all of its requirements.
 
+## Important Note
+
+Note that this is an early draft with *Ideation* status, for community consideration and discussion only. Subject to further development, reflecting community feedback, a future version may be submitted to the BIPs repository for consideration of a *Draft* status and a BIP number, to facilitate a more detailed community discussion of its technical merits and appropriateness for adoption. Based on further clarification, development, implementation and testing, it may one day achieve *Complete* status, indication that it is ready to be considered for consensus adoption.
+
+For more on BIP statuses and the BIP workflow, refer to [BIP 3](https://github.com/bitcoin/bips/blob/master/bip-0003.md).
+
 ## Abstract
 
 This Specification BIP defines a new type of transaction output to enable nodes to safely and robustly redact objectionable content from the blockchain (within reason).
