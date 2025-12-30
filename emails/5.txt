@@ -1,0 +1,28 @@
+Safe Redaction: an early draft BIP
+
+On Tue, 30 Dec 2025, <laissez.faire.btc@gmail.com> wrote:
+
+Hello list, 
+
+I've prepared a draft BIP for community feedback, called Safe Redaction (https://github.com/laissez-faire-btc/safe-redaction/blob/main/bip-safe-redaction.md). It proposes a soft fork that gives node operators the option to redact arbitrary data that they find objectionable, while maintaining the benefits of running a full node.
+
+Please note that I have used BIP 3 for this draft - for a couple of reasons. First and foremost, BIP 3 is likely to be adopted before Safe Redaction, so this is basic future-proofing. Additionally, this may be the first time BIP 3 has been used to draft a new BIP, and so this may add constructive support for the adoption of BIP 3, or highlight issues, or simply help to raise awareness and progress the discussion. 
+
+As described in BIP 3, the purpose of this email is to invite BIP editors and other community members to comment on the proposal, in regard to:
+
+* Novelty of the idea
+* Viability, utility, and relevance of the concept
+* Readiness of the proposal
+* On-topic for the Bitcoin community
+
+Of course, I am also keen to hear any and all thoughts on this proposal, from any perspective. Community interest is a requirement for any new BIP, so if you are interested, please speak up.
+
+If you would like to have a more in-depth conversation than this distribution list can practically support, you are invited to join the Discord server. The latest invite link is in the draft BIP, linked above.
+
+You can also email me details of your preferred mode of private communication, if necessary.
+
+Thank you.
+
+Laissez faire, laissez passer.
+
+Let it be, let it go.
