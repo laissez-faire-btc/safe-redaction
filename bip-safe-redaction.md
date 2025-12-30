@@ -177,7 +177,7 @@ After the soft fork adopting this BIP, a new *Redaction Attack* becomes possible
 * Step 2: Create an unsafe Redaction Statement, falsely claiming that T1 can safely be redacted, and that the updated hash matches the maliciously modified T1.
 * Step 3: Using a 51% attack, mine and confirm this invalid transaction (*T2*). Continue the 51% attack until this Redaction Attack is successful.
 * Step 4: Using separate channels, encourage the victim to accept this Redaction Statement. For example, claim that the original unredacted transaction has illegal content in it.
-* Step 5: Offer the redacted blockchain to the victim for IBD, including the maliciously modified T1, and the unsafe Redaction Statement.
+* Step 5: Offer the redacted blockchain to the victim for IBD, including the maliciously modified T1, and the unsafe Redaction Statement in T2.
 * Step 6: The victim accepts this blockchain, with this redaction applied. The victim sees that T1 is redacted, but the Redaction Statement in T2 tells them that the transaction hash they see is valid for the changes made to the transaction (which is not true), and that only insignificant non-financial data was changed (which is not true).
 * Conclusion: The victim has accepted a maliciously modified transaction, T1.
 
