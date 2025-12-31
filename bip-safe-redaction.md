@@ -95,8 +95,15 @@ The Redaction Statements we will create will attest to both the original hash of
 
 **The Redaction Statement**
 
+The Redaction Statement tells nodes how to safely apply a specific redaction. After the redaction has been applied, the same Redaction Statement can be used to confirm that the only changes made to the transaction were those specified in this Redaction Statement. 
+
+The redaction Statement has the following form:
+
 ```
-<redaction-statement> ::= <uuid> <transaction-hash> <data-segment-list> <transaction-hash-update> <signature-hash-update-list>
+<redaction-statement> ::= <uuid>
+    <transaction-hash> <data-segment-list>
+    <transaction-hash-update>
+    <signature-hash-update-list>
 ```
 
 Where:
