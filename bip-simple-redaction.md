@@ -1,7 +1,7 @@
 ```
   BIP: ? (unassigned)
   Layer: Consensus (soft fork)
-  Title: Safe Redaction
+  Title: Simple Redaction
   Authors: Laissez Faire BTC <laissez.faire.btc@gmail.com>
   Status: Ideation
   Type: Specification
@@ -27,9 +27,9 @@ For more on BIP statuses and the BIP workflow, refer to [BIP 3](https://github.c
 
 ## Abstract
 
-This Specification BIP defines a new type of transaction output to enable nodes to safely and robustly redact objectionable content from the blockchain (within reason).
+This Specification BIP defines a new type of transaction output to enable nodes to redact objectionable content from the blockchain.
 
-Any participant may write a _Redaction Statement_ to the blockchain. A Redaction Statement specifies which bytes of data will be redacted from the blockchain, and exactly how to safely redact those bytes. Once this is committed to the blockchain, any participant may apply the Redaction Statement to safely redact the specified content from their node.
+Any participant may write a _Redaction Statement_ to the blockchain. A Redaction Statement specifies which bytes of data will be redacted from the blockchain, and exactly how to redact those bytes. Once this is committed to the blockchain, any participant may apply the Redaction Statement to redact the specified content from their node.
 
 Where two participants wish to redact the same content, redacted data may be shared between nodes, in redacted form; for example, as part of an initial block download.
 
@@ -37,11 +37,11 @@ The elements of the Redaction Statement workflow (including writing, mining, con
 
 ## Motivation
 
-**What problem does Safe Redaction address?**
+**What problem does Simple Redaction address?**
 
 Bitcoin is money for everybody, but the current rules require that to be a full participant, you must be willing to hold any arbitrary data that is mined, no matter how objectionable. There are, no doubt, people and businesses who would like to join the network, but will not do so under these rules, because they cannot currently do so safely.
 
-**How does Safe Redaction improve things?**
+**How does Simple Redaction improve things?**
 
 This BIP provides a means to remove objectionable content from a node, with minimal impact, in line with the following design goals:
 
@@ -56,54 +56,29 @@ This BIP provides a means to remove objectionable content from a node, with mini
 
 ## Specification
 
-**How does Safe Redaction work?**
+**How does Simple Redaction work?**
 
 The proposal includes the following elements:
 
-* A basic concept of how signed data can be modified, without modifying the signature, but while maintaining the verification and integrity benefits of the signature.
-* A new data format for a *Redaction Statement*, which can tell a node how to safely redact some data out of an earlier transaction, while still allowing the node to validate the now-redacted transaction.
+* A new data format for a *Redaction Statement*, which can tell a node how to redact some data out of an earlier transaction.
 * A description of the *Redaction Operation*, which is where a node applies a Redaction Statement to redact data out of the node's local copy of the blockchain.
-* A new *Consensus Rule*, to disallow a Redaction Statement if the statement does not correctly express a safe Redaction Operation, with a description of how a Redaction Statement can be written into a transaction, signed, broadcast, validated,  mined, and confirmed in line with other transaction types.
+* A new *Consensus Rule*, to disallow a Redaction Statement if the statement does not correctly express a true Redaction Operation, with a description of how a Redaction Statement can be written into a transaction, signed, broadcast, validated, mined, and confirmed, in line with other transaction types.
 * A description of the process by which nodes can share redacted data with other nodes, for example as part of initial block download.
 
 **Modifying Signed Data**
 
-This section starts with a recap of how digital signatures work in Bitcoin, and then describes how we can change this process to work for redacted data.
-
-How data is signed, in general:
-
-* the data to be signed is first hashed
-* the hash of the data is then input to the signing algorithm, along with a private key, to produce the signature data
-
-How a signature is verified, in general: 
-
-* the signed data is first hashed 
-* the hash of the data is then input to the signature verification algorithm, along with a public key, to assess whether the signature is valid for the given hash, and given key 
-
-If the signature verifies, it tells you some facts about exactly what happened in the original signing operation that created the signature data: 
-
-* the corresponding private key was used to create the signature
-* the given hash was used to create the signature
-
-Crucially, note that if you hold the hash and the public key, you can verify the signature without the original data. The reason we normally need the original data, is because it's normally the only way to verify that the statements made in the original data were committed to by the holder of the private key. You hash the data, and use the hash to verify the signature.
-
-The Redaction Statements we will create will attest to both the original hash of the unmodified data, and the updated hash of the redacted data. Then, with only the Redaction Statement and the redacted data, it is possible to verify the correctness of the redacted data, while also verifying that the original unmodified data was properly signed. This is performed as follows: 
-
-* hash the current (redacted) data, and confirm it matches the expected value provided in the Redaction Statement
-* retrieve the original hash value (for the unredacted data) from the Redaction Statement 
-* use this original hash value to verify the signature, confirming that the original (unredacted) data was properly signed (even though we may not see it)
+Redacting data invalidated signatures. For a node to apply a Redaction Statement, they must also be willing to accept the attestation of accumulated proof of work in the longest chain as a proxy for verification of these signatures.
 
 **The Redaction Statement**
 
-The Redaction Statement tells nodes how to safely apply a specific redaction. After the redaction has been applied, the same Redaction Statement can be used to confirm that the only changes made to the transaction were those specified in this Redaction Statement. 
+The Redaction Statement tells nodes how to apply a specific redaction. After the redaction has been applied, the same Redaction Statement can be used to confirm that the only changes made to the transaction were those specified in this Redaction Statement. 
 
 The redaction Statement has the following form:
 
 ```
 <redaction-statement> ::= <uuid>
     <transaction-hash> <data-segment-list>
-    <transaction-hash-update>
-    <signature-hash-update-list>
+    <transaction-hash-updated>
 ```
 
 Where:
@@ -112,9 +87,6 @@ Where:
 * `<transaction-hash>` = the id of the transaction being modified
 * `<data-segment-list>` = a sequence of pairs of numbers, each pair being first the index of the first byte to redact, and second the number of bytes to redact - with the entire list prepended with the length of the list (two bytes, little endian)
 * `<transaction-hash-updated>` = the new transaction hash (transaction id)
-* `<signature-hash-update-list>` = a list of pairs of sighashes, `<sighash-original> <sighash-updated>`, each being first the sighash of the original (unredacted) data, then the sighash of the updated (redacted) data, to be used for one signature in the transaction
-
-The `<redaction-statement>` does not explicitly include the length of the `<signature-hash-update-list>`. The length of this list is implied. The list includes every signature in the transaction that is altered by the specified redaction, and none of the signatures that do not change.
 
 **The Redaction Operation**
 
@@ -123,7 +95,6 @@ The semantics of the Redaction Statement are as follows:
 * The redaction is to be applied to the transaction specified by `<transaction-hash>`.
 * To apply the redaction, change all bytes specified by `<data-segment-list>` to 0x00.
 * After applying the redaction, the new hash of the redacted transaction will be `<transaction-hash-updated>`. Meanwhile, the original `<transaction-hash>` can still be used to refer to this transaction (for example, in future transaction inputs), as a key for indexing and searching for this transaction, and in this block's Merkel tree.
-* After applying the redaction, when `<sighash-updated>` is found to be the input for signature verification in this transaction, it can safely be replaced by `<sighash-original>` for signature verification purposes. If the signature is a valid signature for `<sighash-original>`, this confirms that the only changes to the parts of this transaction that are committed to by this sighash, since signing, are the redaction specified in `<data-segment-list>`.
 
 **Further Redaction For A Redacted Transaction**
 
@@ -131,11 +102,11 @@ It is not supported to apply a redaction to an already-redacted transaction. How
 
 **The Consensus Rule**
 
-Redaction Statements are stored in OP_RETURN data. This BIP disallows some specific OP_RETURN output scripts, where they represent unsafe redactions.
+Redaction Statements are stored in OP_RETURN data. This BIP disallows some specific OP_RETURN output scripts, where they represent invalid redactions.
 
 This BIP changes the interpretation of OP_RETURN outputs, separating them into three categories with different handling:
 
-Category 1: a valid Redaction Statement. If the data embedded in OP_RETURN starts with the well known magic number `<uuid>`, and if the Redaction Statement is well formed and represents true facts about a safe redaction, then this is a valid output. 
+Category 1: a valid Redaction Statement. If the data embedded in OP_RETURN starts with the well known magic number `<uuid>`, and if the Redaction Statement is well formed and represents true facts about a redaction, then this is a valid output. 
 
 Category 2: an invalid Redaction Statement. If the data embedded in OP_RETURN starts with the well known magic number `<uuid>`, and if the Redaction Statement either is not well formed, or represents untrue statements about a redaction, then this is a invalid transaction. 
 
@@ -155,12 +126,7 @@ When considering Category 1 (valid Redaction Statements), the following requirem
 4. each segment in `<data-segment-list>` MUST be either wholly contained within a single input, or wholly contained within a single output.
 5. each segment in `<data-segment-list>` MUST redact at least one non-zero byte.
 6. `<transaction-hash-updated>` MUST be equal to the hash of the transaction after all of the bytes specified by `<data-segment-list>` are changed to 0x00, with no other changes.
-7. `<signature-hash-update-list>` MUST include before-and-after (unredacted and redacted) sighashes for each signature that is invalidated by the redaction, and MUST NOT include any other sighashes.
-8. The Redaction Statement MUST NOT include any further data after the `<signature-hash-update-list>`
-
-**Redacting Tapscript**
-
-TODO: Extend support to modifying Tapscript and updating hashes in Taproot inputs.
+7. The Redaction Statement MUST NOT include any further data after `<transaction-hash-updated>`
 
 **Sharing Redacted Data**
 
@@ -234,8 +200,8 @@ No.
 
 ## Changelog
 
-* __v0.0.0__ (2025-12-29):
-  * initial incomplete draft for discussion
+* __v0.0.0__ (2026-01-01):
+  * initial incomplete draft based on Safe Redaction v0.0.0
 
 ## Copyright
 
